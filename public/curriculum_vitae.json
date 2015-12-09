@@ -1,0 +1,717 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+
+  "id": "https://foo.bar/schemas/curriculum_vitae.json",
+  
+  "definitions": {
+    "company": {
+      "type": "object",
+      "properties": {
+        "name_or_title": {
+          "type": "string"
+        },
+        "location": {
+          "type": "string"
+        },
+        "industry_or_market": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "name_or_title"
+      ]
+    },
+    "institution": {
+      "type": "object",
+      "properties": {
+        "name_or_title": {
+          "type": "string",
+          "default": "MIT"
+        },
+        "location": {
+          "type": "string"
+        },
+        "education_type": {
+          "type": "string",
+          "enum": [
+            "school",
+            "university",
+            "other"
+          ]
+        }
+      },
+      "required": [
+        "name_or_title"
+      ]
+    },
+    "experience": {
+      "type": "object",
+      "properties": {
+        "company": {
+          "$ref": "#/definitions/company"
+        },
+        "occupation": {
+          "type": "string",
+          "default": "Software Developer"
+        },
+        "description": {
+          "type": "string"
+        },
+        "start_date": {
+          "type": "string",
+          "default": "01/01/2015"
+        },
+        "end_date": {
+          "type": "string",
+          "default": ""
+        },
+        "ongoing_or_in_progress": {
+          "type": "boolean",
+          "default": true
+        },
+        "experience_type": {
+          "type": "string",
+          "enum": [
+            "employee",
+            "founder",
+            "advisor",
+            "attorney",
+            "board_member"
+          ]
+        },
+        "projects": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/definitions/project"
+          }
+        },
+        "skills": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/definitions/skill"
+          }
+        },
+        "languages": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/definitions/language"
+          }
+        }
+      },
+      "required": [
+        "company",
+        "occupation",
+        "start_date",
+        "experience_type"
+      ]
+    },
+    "skill": {
+      "type": "object",
+      "properties": {
+        "name_or_title": {
+          "type": "string",
+          "default": "Ruby"
+        },
+        "category": {
+          "type": "string",
+          "enum": [
+            "programming language"
+          ]
+        }
+      },
+      "required": [
+        "name_or_title"
+      ]
+    },
+    "task": {
+      "type": "object",
+      "properties": {
+        "name_or_title": {
+          "type": "string"
+        },
+        "skills": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/definitions/skill"
+          }
+        }
+      },
+      "required": [
+        "name_or_title"
+      ]
+    },
+    "recommendation": {
+      "type": "object",
+      "properties": {
+        "name_or_title": {
+          "type": "string",
+          "default": "Good employee"
+        },
+        "description": {
+          "type": "string",
+          "default": "Recommendation by CEO"
+        },
+        "contact": {
+          "type": "string",
+          "default": "who recommended"
+        },
+        "proof_of_concept": {
+          "type": "string",
+          "default": "how you prove this?"
+        }
+      },
+      "required": [
+        "name_or_title",
+        "description"
+      ]
+    },
+    "publication": {
+      "type": "object",
+      "properties": {
+        "name_or_title": {
+          "type": "string",
+          "default": "Pafnutiy and Enot"
+        },
+        "description": {
+          "type": "string",
+          "default": "Children book"
+        }
+      },
+      "required": [
+        "name_or_title",
+        "description"
+      ]
+    },
+    "patent": {
+      "type": "object",
+      "properties": {
+        "name_or_title": {
+          "type": "string",
+          "default": "Magic Mouse"
+        },
+        "authority": {
+          "type": "string",
+          "default": "My Life"
+        },
+        "country": {
+          "type": "string",
+          "default": "United States"
+        },
+        "license": {
+          "type": "string",
+          "default": "dzigurda12345"
+        }
+      },
+      "required": [
+        "name_or_title",
+        "authority"
+      ]
+    },
+    "certification": {
+      "type": "object",
+      "properties": {
+        "name_or_title": {
+          "type": "string",
+          "default": "Software Engineer"
+        },
+        "authority": {
+          "type": "string",
+          "default": "My Life"
+        },
+        "license": {
+          "type": "string",
+          "default": "dzigurda12345"
+        },
+        "url": {
+          "type": "string",
+          "default": "http://mylife.com/dzigurda12345"
+        },
+        "start_date": {
+          "type": "string",
+          "default": "01/01/2015"
+        },
+        "end_date": {
+          "type": "string",
+          "default": "01/01/2015"
+        },
+        "is_this_cert_expires": {
+          "type": "boolean",
+          "default": true
+        }
+      },
+      "required": [
+        "name_or_title",
+        "start_date"
+      ]
+    },
+    "honor_or_award": {
+      "type": "object",
+      "properties": {
+        "name_or_title": {
+          "type": "string",
+          "default": "Best Employee 2015"
+        },
+        "description": {
+          "type": "string",
+          "default": "Named by employer"
+        },
+        "proof_of_concept": {
+          "type": "string",
+          "default": "Zub dayu!"
+        }
+      },
+      "required": [
+        "name_or_title",
+        "description"
+      ]
+    },
+    "achievement": {
+      "type": "object",
+      "properties": {
+        "name_or_title": {
+          "type": "string",
+          "default": "Was born!"
+        },
+        "description": {
+          "type": "string",
+          "default": "Named by employer"
+        },
+        "proof_of_concept": {
+          "type": "string",
+          "default": "Zub dayu!"
+        }
+      },
+      "required": [
+        "name_or_title",
+        "description"
+      ]
+    },
+    "tool": {
+      "type": "object",
+      "properties": {
+        "name_or_title": {
+          "type": "string",
+          "default": "Mac OS"
+        },
+        "category": {
+          "type": "string",
+          "enum": [
+            "Operating System"
+          ]
+        },
+        "level_or_experience": {
+          "type": "string",
+          "enum": [
+            "Elementary",
+            "Limited working",
+            "Professional working",
+            "Full professional"
+          ]
+        }
+      },
+      "required": [
+        "name_or_title",
+        "category",
+        "level_or_experience"
+      ]
+    },
+    "language": {
+      "type": "object",
+      "properties": {
+        "name_or_title": {
+          "type": "string",
+          "default": "english"
+        },
+        "code": {
+          "type": "string",
+          "default": "en_US"
+        }
+      },
+      "required": [
+        "name_or_title",
+        "code"
+      ]
+    },
+    "language_proficiency": {
+      "type": "object",
+      "title": "Language Proficiency",
+      "properties": {
+        "language": {
+          "$ref": "#/definitions/language"
+        },
+        "level_or_experience": {
+          "type": "string",
+          "enum": [
+            "Elementary",
+            "Limited working",
+            "Professional working",
+            "Full professional",
+            "Native or bilingual"
+          ]
+        }
+      },
+      "required": [
+        "language",
+        "level_or_experience"
+      ]
+    },
+    "education": {
+      "type": "object",
+      "properties": {
+        "institution": {
+          "$ref": "#/definitions/institution"
+        },
+        "degree_or_qualification": {
+          "type": "string",
+          "default": "doctorate of philosophy in dance"
+        },
+        "description": {
+          "type": "string"
+        },
+        "start_date": {
+          "type": "string",
+          "default": "01/01/2015"
+        },
+        "end_date": {
+          "type": "string",
+          "default": ""
+        },
+        "field_of_study": {
+          "type": "string",
+          "default": "wtf is that?"
+        },
+        "gpa": {
+          "type": "string",
+          "default": "wtf is GPA?"
+        },
+        "grade": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 5
+        },
+        "activities_and_societies": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "ongoing_or_in_progress",
+            "finished",
+            "left_or_kicked_out"
+          ]
+        }
+      },
+      "required": [
+        "institution",
+        "degree_or_qualification",
+        "start_date",
+        "status"
+      ]
+    },
+    "person": {
+      "type": "object",
+      "properties": {
+        "full_name": {
+          "type": "string",
+          "default": "Jane / John Doe"
+        },
+        "age": {
+          "type": "integer",
+          "default": 25,
+          "minimum": 18,
+          "maximum": 100
+        },
+        "date_of_birth": {
+          "type": "string",
+          "default": "01/01/2015"
+        },
+        "gender": {
+          "type": "string",
+          "enum": [
+            "male",
+            "female",
+            "other"
+          ]
+        },
+        "marital_status": {
+          "type": "string",
+          "enum": [
+            "single",
+            "married",
+            "divorced",
+            "its_complicated"
+          ]
+        },
+        "avatar_or_photo": {
+          "type": "string",
+          "media": {
+            "binaryEncoding": "base64",
+            "type": "image/png"
+          }
+        },
+        "languages": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/definitions/language_proficiency"
+          }
+        }
+      },
+      "required": [
+        "full_name"
+      ]
+    },
+    "project": {
+      "type": "object",
+      "properties": {
+        "name_or_title": {
+          "type": "string"
+        },
+        "occupation": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "tasks": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/definitions/task"
+          }
+        },
+        "skills": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/definitions/skill"
+          }
+        }
+      },
+      "required": [
+        "name_or_title"
+      ]
+    },
+    "metadata": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string",
+          "default": "0.1"
+        },
+        "privacy": {
+          "type": "string",
+          "enum": [
+            "public",
+            "private",
+            "by_link"
+          ]
+        },
+        "link_to_self": {
+          "type": "string",
+          "default": ""
+        },
+        "language": {
+          "type": "string",
+          "default": "english"
+        }
+      },
+      "required": [
+        "version",
+        "privacy",
+        "language"
+      ]
+    }
+  },
+  
+  "type": "object",
+  
+  "properties": {
+    "metadata": {
+      "$ref": "#/definitions/metadata"
+    },
+    "about": {
+      "$ref": "#/definitions/person"
+    },
+    "summary": {
+      "type": "object",
+      "title": "Summary",
+      "properties": {
+        "current": {
+          "$ref": "#/definitions/company"
+        },
+        "previous": {
+          "$ref": "#/definitions/company"
+        },
+        "what_i_am_looking_for": {
+          "type": "string",
+          "default": "perfect opportunity"
+        },
+        "personal_statement": {
+          "type": "string",
+          "default": "Ruby Jedi"
+        },
+        "preferred": {
+          "type": "object",
+          "title": "Preferred",
+          "properties": {
+            "industries_or_markets": {
+              "type": "array",
+              "uniqueItems": true
+            },
+            "working_time": {
+              "type": "string",
+              "enum": [
+                "full_time",
+                "part_time",
+                "freelance_outsource",
+                "founder_or_cofounder"
+              ]
+            },
+            "minimum_salary": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "locations_or_countries": {
+              "type": "array",
+              "uniqueItems": true
+            }
+          }
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "actively looking for",
+            "passively looking for",
+            "looking for particular opportunity"
+          ]
+        }
+      },
+      "required": [
+        "what_i_am_looking_for",
+        "personal_statement",
+        "status"
+      ]
+    },
+    "companies": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/definitions/company"
+      }
+    },
+    "projects": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/definitions/project"
+      }
+    },
+    "links_and_social": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string"
+      }
+    },
+    "contacts": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string"
+      }
+    },
+    "institutions": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/definitions/institution"
+      }
+    },
+    "experiences": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/definitions/experience"
+      }
+    },
+    "educations": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/definitions/education"
+      }
+    },
+    "skills": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/definitions/skill"
+      }
+    },
+    "languages": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/definitions/language"
+      }
+    },
+    "tools_of_trade": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/definitions/tool"
+      }
+    },
+    "achievements": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/definitions/achievement"
+      }
+    },
+    "honors_and_awards": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/definitions/honor_or_award"
+      }
+    },
+    "certifications": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/definitions/certification"
+      }
+    },
+    "patents": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/definitions/patent"
+      }
+    },
+    "publications": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/definitions/publication"
+      }
+    },
+    "recommendations_or_references": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/definitions/recommendation"
+      }
+    }
+  }
+}
