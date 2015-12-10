@@ -29,7 +29,23 @@ module CVSync
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
 
+    # GZip it up! http://robots.thoughtbot.com/content-compression-with-rack-deflater
+    # config.middleware.insert_before ActionDispatch::Static, Rack::Deflater
+    # config.middleware.use Rack::Deflater
+
+    # This will include only namespaced helpers and application helpers in the views, can include helpers manually
+    # config.action_controller.include_all_helpers = false
+
+    # Generate schema in SQL format, not RB
+    # config.active_record.schema_format = :sql
+    
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
+
+    # Generate only what required
+    config.generators do |g|
+      g.helper = false
+      g.assets = false
+    end
   end
 end

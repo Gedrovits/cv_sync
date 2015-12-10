@@ -30,6 +30,8 @@ gem 'fast_blank'
 # gem 'xorcist' # https://github.com/fny/xorcist
 # gem 'fast_xs'
 # gem 'escape_utils' # https://github.com/brianmario/escape_utils
+
+gem 'jbuilder'
 gem 'oj'
 
 gem 'haml-rails'

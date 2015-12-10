@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  devise_for :users
+  # Direct link to schema
+  get 'schemas/curriculum_vitae', to: 'schemas#curriculum_vitae'
+  
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
