@@ -1,4 +1,12 @@
 class Experience < ActiveRecord::Base
+  has_many :curriculum_vitaes
+  has_one :company
+  has_many :projects
+  has_many :skills
+  has_many :languages
+  
+  EXPERIENCE_TYPES = [:employee, :founder, :advisor, :attorney, :board_member]
+  
   # company / organization
   # occupation
   # description

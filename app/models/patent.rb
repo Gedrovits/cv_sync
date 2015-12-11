@@ -1,4 +1,7 @@
 class Patent < ActiveRecord::Base
+  has_many :curriculum_vitaes
+  has_many :people
+  
   # patent office (country) OR can be 'authority' OR country can be own field
   # status (pattent issued / patent pending)
   # patent / application number OR license (?)

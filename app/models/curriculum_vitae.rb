@@ -1,4 +1,15 @@
 class CurriculumVitae < ActiveRecord::Base
+  has_many :experiences
+  has_many :educations
+  has_many :skills
+  has_many :tools
+  has_many :languages
+  has_many :achievements
+  has_many :certifications
+  has_many :patents
+  has_many :publications
+  has_many :recommendations
+  
   ## Summary
   # current_position / workplace
   # previous_position / workplace

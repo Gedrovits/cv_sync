@@ -1,4 +1,6 @@
 class Certification < ActiveRecord::Base
+  has_many :curriculum_vitaes
+  
   # name or title
   # authority
   # license
