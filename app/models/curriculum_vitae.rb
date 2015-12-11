@@ -1,14 +1,23 @@
 class CurriculumVitae < ActiveRecord::Base
-  has_many :experiences
-  has_many :educations
-  has_many :skills
-  has_many :tools
-  has_many :languages
   has_many :achievements
   has_many :certifications
+  has_many :companies
+  has_many :contacts
+  has_many :educations
+  has_many :experiences
+  has_many :languages
   has_many :patents
+  has_many :people
+  has_many :projects
   has_many :publications
   has_many :recommendations
+  has_many :skills
+  has_many :tasks
+  has_many :tools
+  
+  WORKING_TIMES = [:full_time, :part_time, :freelance_or_outsource, :founder_or_cofounder]
+  
+  STATUSES = [:actively_looking_for, :pasively_looking_for, :looking_for_particular_opportunity]
   
   ## Summary
   # current_position / workplace
