@@ -1,6 +1,8 @@
 class CreateCurriculumVitaes < ActiveRecord::Migration
   def change
     create_table :curriculum_vitaes do |t|
+      t.references :user
+      
       t.integer :current_position_id
       t.integer :previous_position_id
       t.string :what_i_am_looking_for

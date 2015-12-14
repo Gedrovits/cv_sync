@@ -1,6 +1,6 @@
 class Experience < ActiveRecord::Base
   has_many :curriculum_vitaes
-  has_one :company
+  belongs_to :company
   has_many :projects
   has_many :skills
   has_many :languages

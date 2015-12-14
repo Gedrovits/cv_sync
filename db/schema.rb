@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151211103343) do
+ActiveRecord::Schema.define(version: 20151214183620) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -58,6 +58,7 @@ ActiveRecord::Schema.define(version: 20151211103343) do
   end
 
   create_table "curriculum_vitaes", force: :cascade do |t|
+    t.integer  "user_id"
     t.integer  "current_position_id"
     t.integer  "previous_position_id"
     t.string   "what_i_am_looking_for"
@@ -168,6 +169,20 @@ ActiveRecord::Schema.define(version: 20151211103343) do
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
   end
+
+  create_table "references", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "reference_a_id"
+    t.string   "reference_a_type"
+    t.integer  "reference_b_id"
+    t.string   "reference_b_type"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
+  add_index "references", ["reference_a_type", "reference_a_id"], name: "index_references_on_reference_a_type_and_reference_a_id", using: :btree
+  add_index "references", ["reference_b_type", "reference_b_id"], name: "index_references_on_reference_b_type_and_reference_b_id", using: :btree
+  add_index "references", ["user_id"], name: "index_references_on_user_id", using: :btree
 
   create_table "skills", force: :cascade do |t|
     t.string   "name_or_title"

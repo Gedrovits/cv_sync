@@ -1,19 +1,23 @@
 class CurriculumVitae < ActiveRecord::Base
-  has_many :achievements
-  has_many :certifications
-  has_many :companies
-  has_many :contacts
-  has_many :educations
-  has_many :experiences
-  has_many :languages
-  has_many :patents
-  has_many :people
-  has_many :projects
-  has_many :publications
-  has_many :recommendations
-  has_many :skills
-  has_many :tasks
-  has_many :tools
+  include Referable
+  
+  belongs_to :user
+  
+  has_many :achievements, through: :references_a, source: :reference_b, source_type: :Achievement
+  has_many :certifications, through: :references_a, source: :reference_b, source_type: :Certification
+  has_many :companies, through: :references_a, source: :reference_b, source_type: :Company
+  has_many :contacts, through: :references_a, source: :reference_b, source_type: :Contact
+  has_many :educations, through: :references_a, source: :reference_b, source_type: :Education
+  has_many :experiences, through: :references_a, source: :reference_b, source_type: :Experience
+  has_many :languages, through: :references_a, source: :reference_b, source_type: :Language
+  has_many :patents, through: :references_a, source: :reference_b, source_type: :Patent
+  has_many :people, through: :references_a, source: :reference_b, source_type: :Person
+  has_many :projects, through: :references_a, source: :reference_b, source_type: :Project
+  has_many :publications, through: :references_a, source: :reference_b, source_type: :Publication
+  has_many :recommendations, through: :references_a, source: :reference_b, source_type: :Recommendation
+  has_many :skills, through: :references_a, source: :reference_b, source_type: :Skill
+  has_many :tasks, through: :references_a, source: :reference_b, source_type: :Task
+  has_many :tools, through: :references_a, source: :reference_b, source_type: :Tool
   
   WORKING_TIMES = [:full_time, :part_time, :freelance_or_outsource, :founder_or_cofounder]
   
