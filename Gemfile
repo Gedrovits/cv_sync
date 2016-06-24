@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby '2.2.3'
+ruby '2.3.1'
 
 gem 'bundler', '>= 1.8.4'
 
@@ -8,7 +8,7 @@ gem 'mime-types', '>= 2.6.2', require: 'mime/types/columnar' # Free 20% RAM
 
 gem 'nokogiri', '~> 1.6' # CVE Security fixes
 
-gem 'rails', '4.2.5'
+gem 'rails', '4.2.6'
 gem 'pg'
 
 # gem 'rails-i18n'
@@ -68,7 +68,6 @@ group :development do
   gem 'quiet_assets'
   gem 'memory_profiler'
   gem 'brakeman', require: false
-  gem 'did_you_mean'
 
   # Deploy
   # gem 'mina' # http://mina-deploy.github.io/mina/
